@@ -134,12 +134,12 @@ function App() {
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
       setHideLetter({ hideAll: true });
-      setTimer({ startTimer: false, key: 0 });
+      setTimer({ startTimer: false });
     }, 5000);
 
     if (start) {
       setHideLetter({ hideAll: false });
-      setTimer({ startTimer: true, key: timer.key + 1 });
+      setTimer({ startTimer: true });
       setMessage("");
     }
 
