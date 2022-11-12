@@ -152,7 +152,7 @@ function App() {
     setTimeLeft(1);
   };
 
-  const exit = () => {
+  const exitGame = () => {
     setStart(false);
     setAttempts(0);
   };
@@ -195,7 +195,7 @@ function App() {
           Start
         </button>
       ) : (
-        <button className="btn" onClick={exit}>
+        <button className="btn" onClick={exitGame}>
           Exit
         </button>
       )}
