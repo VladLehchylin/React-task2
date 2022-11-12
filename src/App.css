@@ -3,7 +3,7 @@
 }
 
 p {
-  margin: 5px 0;
+  margin: 6px 0;
 }
 
 .App {
@@ -11,11 +11,13 @@ p {
 }
 
 body {
-  background: rgb(66,68,170);
-  background: linear-gradient(330deg, rgba(66,68,170,1) 0%, rgba(170,66,159,1) 50%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(
+    330deg,
+    rgba(66, 68, 170, 1) 0%,
+    rgba(170, 66, 159, 1) 50%,
+    rgba(0, 212, 255, 1) 100%
+  );
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   height: calc(100vh - 150px);
   margin: 0;
 }
@@ -27,36 +29,20 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.correct-letter, .time {
-  grid-column-start: 1;
-  grid-column-end: 4;
-}
-
-.button {
-  font-size: 30px;
-  padding: 5px;
-  margin: 5px;
+.letter-button {
   background-color: transparent;
-  cursor: pointer;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 10px;
-
-  width: 100px;
   height: 150px;
   font-size: 70px;
+  color: #fff;
+  margin: 5px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .flex {
   display: flex;
   justify-content: center;
-}
-
-.btn-start {
-  width: 100px;
-  height: 150px;
-  font-size: 70px;
-  cursor: auto;
 }
 
 .btn {
@@ -66,16 +52,14 @@ body {
   border: 2px solid #fff;
   color: #fff;
   cursor: pointer;
-  display: block;
   margin: 0 auto;
   margin-top: 30px;
   width: 120px;
   height: 55px;
+  display: block;
 }
 
 .info {
-  max-width: 310px;
-  margin: 0 auto;
   color: #fff;
   font-size: 20px;
   margin-bottom: 15px;
@@ -89,13 +73,13 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(133, 129, 129, .9);
+  background: rgba(133, 129, 129, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .letter {

@@ -43,7 +43,7 @@ function AllLetters() {
   return (
     <>
       {letters.map((item, index) => (
-        <button key={index} className="button">
+        <button key={index} className="letter-button">
           {item}
         </button>
       ))}
@@ -87,11 +87,11 @@ function LetterCard({ letter, hideLetter, message, setAttempts }) {
   return (
     <>
       {hideLetter.hideAll && !showLetter ? (
-        <button className="button" onClick={checkUserAnswer}>
+        <button className="letter-button" onClick={checkUserAnswer}>
           *
         </button>
       ) : (
-        <button className="button">{letter}</button>
+        <button className="letter-button">{letter}</button>
       )}
     </>
   );
