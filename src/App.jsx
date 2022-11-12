@@ -86,7 +86,7 @@ function LetterCard({ letter, hideLetter, message, setAttempts }) {
 
   return (
     <>
-      {hideLetter.hideAll && !showLetter ? (
+      {hideLetter && !showLetter ? (
         <button className="letter-button" onClick={checkUserAnswer}>
           *
         </button>
@@ -117,10 +117,10 @@ function Message({ message, startGame }) {
 }
 
 function App() {
-  const [start, setStart] = useState({ start: false });
-  const [timer, setTimer] = useState({ startTimer: true });
+  const [start, setStart] = useState(false);
+  const [timer, setTimer] = useState(true);
   const [timeLeft, setTimeLeft] = useState(null);
-  const [hideLetter, setHideLetter] = useState({ hideAll: false });
+  const [hideLetter, setHideLetter] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -133,13 +133,13 @@ function App() {
 
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
-      setHideLetter({ hideAll: true });
-      setTimer({ startTimer: false });
+      setHideLetter(true);
+      setTimer(false);
     }, 5000);
 
     if (start) {
-      setHideLetter({ hideAll: false });
-      setTimer({ startTimer: true });
+      setHideLetter(false);
+      setTimer(true);
       setMessage("");
     }
 
@@ -148,21 +148,26 @@ function App() {
 
   const startGame = () => {
     initLetters();
-    setStart({ start: true, title: "Restart" });
+    setStart(true);
     setTimeLeft(1);
+  };
+
+  const exit = () => {
+    setStart(false);
+    setAttempts(0);
   };
 
   return (
     <div className="App">
       <>
-        {start.start ? (
+        {start ? (
           <>
             {message ? (
               <Message message={message} startGame={startGame} />
             ) : null}
             <div className="flex info">
               <span>Find All The Letters &#8594; {correctLatter}</span>
-              <span>{timer.startTimer ? <Timer /> : "GO"}</span>
+              <span>{timer ? <Timer /> : "GO"}</span>
               <span>Attempts: {attempts}</span>
             </div>
             <div className="game-field">
@@ -185,11 +190,15 @@ function App() {
           <StartField />
         )}
       </>
-      {!start.start ? (
+      {!start ? (
         <button className="btn" onClick={startGame}>
-          Play Game
+          Start
         </button>
-      ) : null}
+      ) : (
+        <button className="btn" onClick={exit}>
+          Exit
+        </button>
+      )}
     </div>
   );
 }
