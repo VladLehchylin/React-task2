@@ -118,7 +118,7 @@ function Message({ message, startGame }) {
 
 function App() {
   const [start, setStart] = useState({ start: false });
-  const [timer, setTimer] = useState({ startTimer: true, key: 0 });
+  const [timer, setTimer] = useState({ startTimer: true });
   const [timeLeft, setTimeLeft] = useState(null);
   const [hideLetter, setHideLetter] = useState({ hideAll: false });
   const [attempts, setAttempts] = useState(0);
@@ -162,7 +162,7 @@ function App() {
             ) : null}
             <div className="flex info">
               <span>Find All The Letters &#8594; {correctLatter}</span>
-              <span>{timer.startTimer ? <Timer key={timer.key} /> : "GO"}</span>
+              <span>{timer.startTimer ? <Timer /> : "GO"}</span>
               <span>Attempts: {attempts}</span>
             </div>
             <div className="game-field">
