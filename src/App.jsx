@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-const startBoard = ["L", "E", "T", "'", "S", " ", "P", "L", "E", "Y"];
+const startField = ["L", "E", "T", "'", "S", " ", "P", "L", "E", "Y"];
 
 const availableLetters = {
   1: "A",
@@ -11,7 +11,7 @@ const availableLetters = {
 
 let letters = [];
 let lettersCopy = [];
-let corectLatter = "";
+let correctLatter = "";
 
 const randomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -23,7 +23,7 @@ const initLetters = () => {
     letters[i] = randomLetter();
   }
 
-  corectLatter = letters[randomNumber(0, letters.length - 1)];
+  correctLatter = letters[randomNumber(0, letters.length - 1)];
   lettersCopy = [...letters];
 };
 
@@ -42,18 +42,22 @@ function Timer() {
 function AllLetters() {
   return (
     <>
-      {letters.map((item) => (
-        <button className="button">{item}</button>
+      {letters.map((item, index) => (
+        <button key={index} className="button">
+          {item}
+        </button>
       ))}
     </>
   );
 }
 
-function StartBord() {
+function StartField() {
   return (
     <div className="flex">
-      {startBoard.map((item) => (
-        <button className="button btn-start">{item}</button>
+      {startField.map((item, index) => (
+        <span key={index} className="letter">
+          {item}
+        </span>
       ))}
     </div>
   );
@@ -61,26 +65,21 @@ function StartBord() {
 
 function LetterCard({ letter, hideLetter, message, setAttempts }) {
   const [showLetter, setShowLetter] = useState(false);
-  const [classBtn, setClassBtn] = useState("");
 
-  const letterPosition = () => lettersCopy.indexOf(corectLatter);
+  const letterPosition = () => lettersCopy.indexOf(correctLatter);
 
   const checkUserAnswer = () => {
-    if (corectLatter !== letter) {
+    if (correctLatter !== letter) {
       setShowLetter(true);
       setAttempts((prev) => prev + 1);
-      setClassBtn("wrong");
       message("YOU LOSE");
-      setHideLetter({ hideAll: true });
     } else {
       setShowLetter(true);
-      setClassBtn("correct");
       setAttempts((prev) => prev + 1);
       lettersCopy[letterPosition()] = "";
 
       if (letterPosition() === -1) {
         message("YOU WIN");
-        setHideLetter({ hideAll: true });
       }
     }
   };
@@ -123,7 +122,6 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(null);
   const [hideLetter, setHideLetter] = useState({ hideAll: false });
   const [attempts, setAttempts] = useState(0);
-
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -156,18 +154,16 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <>
         {start.start ? (
           <>
             {message ? (
               <Message message={message} startGame={startGame} />
             ) : null}
             <div className="flex info">
-              <p>Find All The Letters &#8594; {corectLatter}</p>
-              <p className="time">
-                {timer.startTimer ? <Timer key={timer.key} /> : "GO"}
-              </p>
-              <p>Attempts {attempts}</p>
+              <span>Find All The Letters &#8594; {correctLatter}</span>
+              <span>{timer.startTimer ? <Timer key={timer.key} /> : "GO"}</span>
+              <span>Attempts: {attempts}</span>
             </div>
             <div className="game-field">
               {message ? (
@@ -186,9 +182,9 @@ function App() {
             </div>
           </>
         ) : (
-          <StartBord />
+          <StartField />
         )}
-      </div>
+      </>
       {!start.start ? (
         <button className="btn" onClick={startGame}>
           Play Game
