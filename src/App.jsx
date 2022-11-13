@@ -49,7 +49,7 @@ function App() {
   const startGame = () => {
     setGameInfo(init);
     setStart(true);
-    setTimeLeft(null);
+    setTimeLeft(true);
   };
 
   const exitGame = () => {
