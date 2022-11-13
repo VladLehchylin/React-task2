@@ -19,12 +19,9 @@ function App() {
     lettersCopy: [],
     correctLetter: "",
   });
-
   const [start, setStart] = useState(false);
   const [timer, setTimer] = useState(true);
-
-  const [timeLeft, setTimeLeft] = useState(null);
-
+  const [timeLeft, setTimeLeft] = useState(false);
   const [hideLetter, setHideLetter] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [message, setMessage] = useState("");
@@ -36,8 +33,7 @@ function App() {
     }, 5000);
 
     if (start) {
-      setTimeLeft(null);
-
+      setTimeLeft(false);
       setHideLetter(false);
       setTimer(true);
       setMessage("");
@@ -55,7 +51,8 @@ function App() {
   const exitGame = () => {
     setStart(false);
     setAttempts(0);
-    setTimeLeft(null);
+    setTimeLeft(false);
+    setMessage("");
   };
 
   return (
@@ -69,7 +66,7 @@ function App() {
             <div className="flex info">
               <CorrectLetter correctLetter={gameInfo.correctLetter} />
               <Attempts attempts={attempts} />
-              {timer ? <Timer /> : <span>"GO"</span>}
+              {timer ? <Timer /> : <span>GOOOO</span>}
             </div>
             <div className="game-field">
               {message ? (
