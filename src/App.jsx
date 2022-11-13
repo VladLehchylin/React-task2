@@ -22,7 +22,9 @@ function App() {
 
   const [start, setStart] = useState(false);
   const [timer, setTimer] = useState(true);
+
   const [timeLeft, setTimeLeft] = useState(null);
+
   const [hideLetter, setHideLetter] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [message, setMessage] = useState("");
@@ -34,8 +36,9 @@ function App() {
     }, 5000);
 
     if (start) {
-      setHideLetter(false);
       setTimeLeft(null);
+
+      setHideLetter(false);
       setTimer(true);
       setMessage("");
     }
@@ -46,7 +49,7 @@ function App() {
   const startGame = () => {
     setGameInfo(init);
     setStart(true);
-    setTimeLeft(true);
+    setTimeLeft(null);
   };
 
   const exitGame = () => {
