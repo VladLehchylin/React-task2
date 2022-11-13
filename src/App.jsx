@@ -66,7 +66,7 @@ function App() {
             <div className="flex info">
               <CorrectLetter correctLetter={gameInfo.correctLetter} />
               <Attempts attempts={attempts} />
-              {timer ? <Timer /> : <span>GOOOO</span>}
+              {timer ? <Timer /> : <span>GOOoO</span>}
             </div>
             <div className="game-field">
               {message ? (
