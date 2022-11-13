@@ -1,4 +1,4 @@
-function AllLetters() {
+function AllLetters({ letters }) {
   return (
     <>
       {letters.map((item, index) => (

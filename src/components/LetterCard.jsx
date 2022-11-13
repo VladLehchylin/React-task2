@@ -1,19 +1,20 @@
 import { useState } from "react";
 
-function LetterCard({ letter, hideLetter, message, setAttempts }) {
+function LetterCard({ letter, hideLetter, message, setAttempts, gameInfo }) {
   const [showLetter, setShowLetter] = useState(false);
 
-  const letterPosition = () => lettersCopy.indexOf(correctLetter);
+  const letterPosition = () =>
+    gameInfo.lettersCopy.indexOf(gameInfo.correctLetter);
 
   const checkUserAnswer = () => {
-    if (correctLetter !== letter) {
+    if (gameInfo.correctLetter !== letter) {
       setShowLetter(true);
       setAttempts((prev) => prev + 1);
       message("YOU LOSE");
     } else {
       setShowLetter(true);
       setAttempts((prev) => prev + 1);
-      lettersCopy[letterPosition()] = "";
+      gameInfo.lettersCopy[letterPosition()] = "";
 
       if (letterPosition() === -1) {
         message("YOU WIN");

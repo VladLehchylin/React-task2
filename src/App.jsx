@@ -9,15 +9,16 @@ import Message from "./components/Message";
 import StartField from "./components/StartField";
 import Timer from "./components/Timer";
 
+import init from "./utils";
+
 import "./App.css";
 
-let letters = [];
-let correctLetter = "";
-let lettersCopy = [];
-
 function App() {
-  const [letters, setLetters] = useState([]);
-  const [correctLetter, setCorrectLetter] = useState("");
+  const [gameInfo, setGameInfo] = useState({
+    letters: [],
+    lettersCopy: [],
+    correctLetter: "",
+  });
 
   const [start, setStart] = useState(false);
   const [timer, setTimer] = useState(true);
@@ -42,28 +43,8 @@ function App() {
     return () => clearInterval(intervalId);
   }, [timeLeft]);
 
-  const availableLetters = {
-    1: "A",
-    2: "B",
-    3: "C",
-  };
-
-  const randomNumber = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
-
-  const randomLetter = () => availableLetters[randomNumber(1, 3)];
-
-  const initLetters = () => {
-    for (let i = 0; i < 9; i++) {
-      letters[i] = randomLetter();
-    }
-
-    correctLetter = letters[randomNumber(0, letters.length - 1)];
-    lettersCopy = [...letters];
-  };
-
   const startGame = () => {
-    initLetters();
+    setGameInfo(init);
     setStart(true);
     setTimeLeft(true);
   };
@@ -83,21 +64,22 @@ function App() {
               <Message message={message} startGame={startGame} />
             ) : null}
             <div className="flex info">
-              <CorrectLetter correctLetter={correctLetter} />
+              <CorrectLetter correctLetter={gameInfo.correctLetter} />
               <Attempts attempts={attempts} />
               {timer ? <Timer /> : <span>"GO"</span>}
             </div>
             <div className="game-field">
               {message ? (
-                <AllLetters />
+                <AllLetters letters={gameInfo.letters} />
               ) : (
-                letters.map((item, index) => (
+                gameInfo.letters.map((item, index) => (
                   <LetterCard
                     key={index}
                     letter={item}
                     hideLetter={hideLetter}
                     message={setMessage}
                     setAttempts={setAttempts}
+                    gameInfo={gameInfo}
                   />
                 ))
               )}
